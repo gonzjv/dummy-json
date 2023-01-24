@@ -1,21 +1,28 @@
+import { IPost } from '../store/post.store';
+
+export interface IResponsePost {
+  posts: IPost[];
+}
+
 const API_URL = import.meta.env.VITE_API_URL;
 
-const getPostArr = async () => {
-  //   const myHeaders = {
-  //     'Content-Type': 'application/json',
-  //   };
-  //   const options = {
-  //     headers: myHeaders,
-  //   };
-  const url = `${API_URL}products/`;
+const getPostArr =
+  async (): Promise<IResponsePost> => {
+    //   const myHeaders = {
+    //     'Content-Type': 'application/json',
+    //   };
+    //   const options = {
+    //     headers: myHeaders,
+    //   };
+    const url = `${API_URL}posts/`;
 
-  try {
     const response = await fetch(url);
     const data = await response.json();
     return data;
-  } catch (error) {
-    console.log('Erorr:', error);
-  }
-};
+    //   try {
+    //   } catch (error) {
+    //     console.log('Erorr:', error);
+    //   }
+  };
 
 export { getPostArr };

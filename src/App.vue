@@ -4,9 +4,7 @@ import PostList from './components/PostList.vue';
 </script>
 
 <template>
-  <main>
-    <PostList />
-  </main>
+  <PostList />
 </template>
 
 <style scoped>
