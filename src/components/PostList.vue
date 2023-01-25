@@ -2,24 +2,16 @@
 import { storeToRefs } from 'pinia';
 import { onBeforeMount } from 'vue';
 import { usePostStore } from './../store/post.store';
-import { useUserStore } from './../store/user.store';
 import { getPostArr } from '../service/post.service';
-import { getUserArr } from '../service/user.service';
 import Post from './Post.vue';
 
 const postStore = usePostStore();
-const userStore = useUserStore();
 const { postArr } = storeToRefs(postStore);
-const { userArr } = storeToRefs(userStore);
 
 onBeforeMount(async () => {
   const { posts } = await getPostArr();
   postArr.value = posts;
   console.log('postArr', postArr.value);
-
-  const { users } = await getUserArr();
-  userArr.value = users;
-  console.log('userArr', userArr.value);
 });
 </script>
 <template>

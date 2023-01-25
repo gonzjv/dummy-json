@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
-import { useUserStore } from '../store/user.store';
-import { IPost } from './../interface/post.interface';
+// import { storeToRefs } from 'pinia';
+// import { computed } from 'vue';
+// import { useUserStore } from '../store/user.store';
+import {
+  IPost,
+  IPostState,
+} from './../interface/post.interface';
+import { getUser } from './../service/user.service';
+import {
+  onBeforeMount,
+  reactive,
+  toRefs,
+} from 'vue';
 
 const props = defineProps<{
   postData: IPost;
@@ -10,19 +19,18 @@ const props = defineProps<{
 
 const { postData } = props;
 
-const userStore = useUserStore();
-const { userArr } = storeToRefs(userStore);
-
-const imgSrc = computed(() => {
-  return userArr.value.find(
-    (user) => user.id == postData.userId
-  )?.image;
+const state: IPostState = reactive({
+  user: {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    image: '',
+  },
 });
+const { user } = toRefs(state);
 
-const firstName = computed(() => {
-  return userArr.value.find(
-    (user) => user.id == postData.userId
-  )?.firstName;
+onBeforeMount(async () => {
+  user.value = await getUser(postData.userId);
 });
 </script>
 
@@ -33,9 +41,13 @@ const firstName = computed(() => {
     <figure
       class="flex flex-col gap-5 justify-center items-center bg-slate-700 w-40 h-40 rounded-full"
     >
-      <img class="w-20" :src="imgSrc" alt="" />
+      <img
+        class="w-20"
+        :src="user.image"
+        alt=""
+      />
       <figcaption class="font-bold">
-        {{ firstName }}
+        {{ user.firstName }}
       </figcaption>
     </figure>
     <h2
