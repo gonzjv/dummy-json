@@ -7,7 +7,3 @@ export interface IPost {
   body: string;
   tags: string[];
 }
-
-export interface IPostState {
-  user: IUser;
-}

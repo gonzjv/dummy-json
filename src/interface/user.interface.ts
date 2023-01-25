@@ -4,3 +4,7 @@ export interface IUser {
   lastName: string;
   image: string;
 }
+
+export interface IUserState {
+  user: IUser;
+}
