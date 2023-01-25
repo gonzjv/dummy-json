@@ -1,20 +1,20 @@
-import { IPost } from '../store/post.store';
+import { IUser } from '../interface/user.interface';
 
-export interface IResponsePost {
-  posts: IPost[];
+export interface IResponseUser {
+  users: IUser[];
 }
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const getPostArr =
-  async (): Promise<IResponsePost> => {
+const getUserArr =
+  async (): Promise<IResponseUser> => {
     //   const myHeaders = {
     //     'Content-Type': 'application/json',
     //   };
     //   const options = {
     //     headers: myHeaders,
     //   };
-    const url = `${API_URL}posts/`;
+    const url = `${API_URL}users/`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -25,4 +25,4 @@ const getPostArr =
     //   }
   };
 
-export { getPostArr };
+export { getUserArr };

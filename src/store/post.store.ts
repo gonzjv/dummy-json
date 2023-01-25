@@ -1,8 +1,5 @@
 import { defineStore } from 'pinia';
-
-export interface IPost {
-  title: string;
-}
+import { IPost } from './../interface/post.interface';
 
 export const usePostStore = defineStore('post', {
   state: () => ({
