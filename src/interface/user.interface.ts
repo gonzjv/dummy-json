@@ -8,3 +8,7 @@ export interface IUser {
 export interface IUserState {
   user: IUser;
 }
+
+export interface IUserArr {
+  users: IUser[];
+}

@@ -1,8 +1,7 @@
-import { IUser } from '../interface/user.interface';
-
-interface IUserArr {
-  users: IUser[];
-}
+import {
+  IUser,
+  IUserArr,
+} from '../interface/user.interface';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
