@@ -37,6 +37,7 @@ onBeforeMount(async () => {
 <template>
   <button
     class="transition-all max-w-max font-bold hover:text-sky-200 border-b border-sky-200"
+    :class="isCommentsDisplay && 'text-sky-200'"
     @click="
       isCommentsDisplay = !isCommentsDisplay
     "

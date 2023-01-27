@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import PostList from './components/PostList.vue';
+import HeaderVue from './components/Header.vue';
 </script>
 
 <template>
+  <HeaderVue />
   <PostList />
 </template>
 
