@@ -10,6 +10,7 @@ export interface IComment {
 
 export interface ICommentResponse {
   comments: IComment[];
+  isCommentsDisplay: boolean;
 }
 
 export interface ICommentListState {

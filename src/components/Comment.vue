@@ -26,7 +26,15 @@ onBeforeMount(async () => {
 </script>
 <template>
   <div class="flex gap-5 items-start">
-    <img class="w-8" :src="user.image" alt="" />
+    <figure
+      class="h-16 w-16 bg-slate-600 rounded-full flex items-center justify-center"
+    >
+      <img
+        class="w-12"
+        :src="user.image"
+        alt=""
+      />
+    </figure>
     <div
       class="flex flex-col items-start border border-slate-500 rounded-lg"
     >

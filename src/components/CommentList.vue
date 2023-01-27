@@ -21,8 +21,10 @@ const props = defineProps<{
 
 const state: ICommentResponse = reactive({
   comments: [],
+  isCommentsDisplay: false,
 });
-const { comments } = toRefs(state);
+const { comments, isCommentsDisplay } =
+  toRefs(state);
 
 onBeforeMount(async () => {
   const response = await getCommentArr(
@@ -33,16 +35,27 @@ onBeforeMount(async () => {
 });
 </script>
 <template>
-  <ul
-    class="w-full flex flex-col gap-3 justify-start items-start bg-gray-700 p-5 rounded-lg border border-slate-600"
+  <button
+    class="transition-all max-w-max font-bold hover:text-sky-200 border-b border-sky-200"
+    @click="
+      isCommentsDisplay = !isCommentsDisplay
+    "
   >
-    <h3
-      class="font-bold text-sky-200 border-b border-sky-200"
+    Comments
+  </button>
+  <Transition
+    enter-active-class="transition-all duration-1000"
+    leave-active-class="transition-all duration-1000"
+    enter-from-class="opacity-0"
+    leave-to-class="opacity-0"
+  >
+    <ul
+      v-if="isCommentsDisplay"
+      class="w-full flex flex-col gap-3 justify-start items-start bg-gray-700 p-5 rounded-lg border border-slate-600"
     >
-      Comments:
-    </h3>
-    <li class="" v-for="comment in comments">
-      <Comment :comment="comment" />
-    </li>
-  </ul>
+      <li v-for="comment in comments">
+        <Comment :comment="comment" />
+      </li>
+    </ul>
+  </Transition>
 </template>
