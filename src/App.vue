@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import PostList from './components/PostList.vue';
 import HeaderVue from './components/Header.vue';
+import Cover from './components/Cover.vue';
+import Popup from './components/Popup.vue';
+import { useDisplayStore } from './store/display.store';
+import { storeToRefs } from 'pinia';
+
+const displayStore = useDisplayStore();
+const { isPopupDisplay } =
+  storeToRefs(displayStore);
 </script>
 
 <template>
   <HeaderVue />
-  <PostList />
+  <PostList
+    :class="isPopupDisplay && 'blur-[2px] '"
+    class="transition-all duration-700"
+  />
+  <Cover />
+  <Popup />
 </template>
 
 <style scoped>
