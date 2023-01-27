@@ -17,7 +17,7 @@ onBeforeMount(async () => {
 <template>
   <main class="flex flex-col gap-10">
     <h1
-      class="font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-sky-300 to-indigo-700"
+      class="font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-sky-200 to-indigo-400"
     >
       post list
     </h1>

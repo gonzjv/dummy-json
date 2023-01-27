@@ -4,15 +4,9 @@ import {
   reactive,
   toRefs,
 } from 'vue';
+import { INIT_USER } from '../helper/initial-data-helper';
 import { IUserState } from '../interface/user.interface';
 import { getUser } from '../service/user.service';
-
-const INIT_USER = {
-  id: 0,
-  firstName: '',
-  lastName: '',
-  image: '',
-};
 
 const props = defineProps<{
   userId: number;
