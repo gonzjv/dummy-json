@@ -7,14 +7,13 @@ import { useDisplayStore } from './store/display.store';
 import { storeToRefs } from 'pinia';
 
 const displayStore = useDisplayStore();
-const { isPopupDisplay } =
-  storeToRefs(displayStore);
+const { popup } = storeToRefs(displayStore);
 </script>
 
 <template>
   <HeaderVue />
   <PostList
-    :class="isPopupDisplay && 'blur-[2px] '"
+    :class="popup.display && 'blur-[2px] '"
     class="transition-all duration-700"
   />
   <Cover />

@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia';
 
+interface IPopup {
+  display: boolean;
+  name: string;
+}
+
 export const useDisplayStore = defineStore(
   'display',
   {
     state: () => ({
-      isPopupDisplay: false,
+      popup: {} as IPopup,
     }),
   }
 );
