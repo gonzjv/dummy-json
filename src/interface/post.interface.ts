@@ -7,3 +7,8 @@ export interface IPost {
   body: string;
   tags: string[];
 }
+export interface IPostData {
+  userId: number;
+  title: string;
+  body: string;
+}

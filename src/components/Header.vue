@@ -22,7 +22,7 @@ const { isPopupDisplay } =
           isPopupDisplay: true,
         })
       "
-      class="border-b border-sky-200 text-slate-400 hover:text-sky-200 transition-all duration-300"
+      class="bg-transparent border-b border-sky-200 text-slate-400 hover:text-sky-200 transition-all duration-300"
     >
       Add post
     </button>
