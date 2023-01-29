@@ -1,4 +1,5 @@
 import {
+  ILoginData,
   IUser,
   IUserArr,
 } from '../interface/user.interface';
@@ -24,4 +25,23 @@ const getUser = async (
   return data;
 };
 
-export { getUserArr, getUser };
+const loginUser = async (
+  loginData: ILoginData
+): Promise<IUser> => {
+  const myHeaders = {
+    'Content-Type': 'application/json',
+  };
+  const options = {
+    method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(loginData),
+  };
+
+  const url = `${API_URL}auth/login`;
+
+  const response = await fetch(url, options);
+  const results = await response.json();
+  return results;
+};
+
+export { getUserArr, getUser, loginUser };

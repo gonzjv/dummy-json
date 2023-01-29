@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { reactive, toRefs } from 'vue';
 import { useDisplayStore } from '../store/display.store';
 import PopupAddPost from './PopupAddPost.vue';
 import PopupLogin from './PopupLogin.vue';

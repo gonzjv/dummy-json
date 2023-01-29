@@ -5,9 +5,32 @@ import Cover from './components/Cover.vue';
 import Popup from './components/Popup.vue';
 import { useDisplayStore } from './store/display.store';
 import { storeToRefs } from 'pinia';
+import { inject, onBeforeMount } from 'vue';
+import { VueCookies } from 'vue-cookies';
+import { useUserStore } from './store/user.store';
 
 const displayStore = useDisplayStore();
 const { popup } = storeToRefs(displayStore);
+
+const userStore = useUserStore();
+const { userData } = storeToRefs(userStore);
+
+const $cookies = inject<VueCookies>('$cookies');
+const userDataCookie = $cookies!.get('userData');
+
+const checkCookie = () => {
+  if (userDataCookie) {
+    userStore.$patch({
+      userData: userDataCookie,
+    });
+
+    console.log('userData', userData.value);
+  }
+};
+
+onBeforeMount(() => {
+  checkCookie();
+});
 </script>
 
 <template>
@@ -20,16 +43,4 @@ const { popup } = storeToRefs(displayStore);
   <Popup />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<style scoped></style>

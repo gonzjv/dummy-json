@@ -3,6 +3,7 @@ import { IUser } from '../interface/user.interface';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    userArr: [] as IUser[],
+    // userArr: [] as IUser[],
+    userData: {} as IUser,
   }),
 });

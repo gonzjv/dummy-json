@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { reactive, toRefs } from 'vue';
+import { storeToRefs } from 'pinia';
+import { reactive, toRefs, inject } from 'vue';
+import { VueCookies } from 'vue-cookies';
+import { loginUser } from '../service/user.service';
+import { useUserStore } from '../store/user.store';
+
+const $cookies = inject<VueCookies>('$cookies');
+
+const userStore = useUserStore();
 
 const state = reactive({
   username: '',
@@ -7,8 +15,20 @@ const state = reactive({
 });
 const { username, password } = toRefs(state);
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   console.log('SUBMIT');
+  const userData = {
+    username: username.value,
+    password: password.value,
+  };
+  const user = await loginUser(userData);
+  console.log('user', user);
+
+  userStore.$patch({
+    userData: user,
+  });
+
+  $cookies!.set('userData', user);
 };
 </script>
 <template>

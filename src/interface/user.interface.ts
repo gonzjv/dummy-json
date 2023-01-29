@@ -12,3 +12,8 @@ export interface IUserState {
 export interface IUserArr {
   users: IUser[];
 }
+
+export interface ILoginData {
+  username: string;
+  password: string;
+}

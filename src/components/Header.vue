@@ -1,13 +1,23 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDisplayStore } from '../store/display.store';
 import {
   ChatBubbleOvalLeftEllipsisIcon,
   UserCircleIcon,
 } from '@heroicons/vue/24/outline';
+import { useUserStore } from '../store/user.store';
 
 const displayStore = useDisplayStore();
+const userStore = useUserStore();
 const { popup } = storeToRefs(displayStore);
+const { userData } = storeToRefs(userStore);
+
+const loginBtnText = computed(() =>
+  userData.value.firstName
+    ? userData.value.firstName
+    : 'Log In'
+);
 
 const openPopup = (popupName: string) => {
   displayStore.$patch({
@@ -43,7 +53,9 @@ const openPopup = (popupName: string) => {
         class="w-full flex gap-1 justify-center items-center font-bold bg-transparent border-b border-sky-200 text-slate-400 hover:text-sky-200 transition-all duration-300"
       >
         <UserCircleIcon class="h-7" />
-        <p class="min-w-fit pt-2">Log In</p>
+        <p class="min-w-fit pt-2">
+          {{ loginBtnText }}
+        </p>
       </button>
     </nav>
   </header>
