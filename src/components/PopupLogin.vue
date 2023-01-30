@@ -18,6 +18,12 @@ const state = reactive({
 });
 const { username, password } = toRefs(state);
 
+const hidePopup = () => {
+  displayStore.$patch({
+    popup: { display: false, name: '' },
+  });
+};
+
 const handleSubmit = async () => {
   console.log('SUBMIT');
   const userData = {
@@ -33,17 +39,14 @@ const handleSubmit = async () => {
     });
 
     $cookies!.set('userData', user);
-    displayStore.$patch({
-      popup: { display: false, name: '' },
-    });
+    hidePopup();
   }
 };
 
 const handleLogoutClick = () => {
   $cookies!.remove('userData');
-  userStore.$patch({
-    userData: {},
-  });
+  userStore.$reset();
+  hidePopup();
 };
 </script>
 <template>

@@ -36,11 +36,11 @@ const addPost = async (
     'Content-Type': 'application/json',
   };
   const options = {
-    headers: myHeaders,
-    body: JSON.stringify({ postData }),
     method: 'POST',
+    headers: myHeaders,
+    body: JSON.stringify(postData),
   };
-  const url = `${API_URL}posts/?limit=${POST_LIMIT}`;
+  const url = `${API_URL}posts/add`;
 
   const response = await fetch(url, options);
   const data = await response.json();

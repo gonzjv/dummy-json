@@ -1,5 +1,15 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia';
 import { reactive, toRefs } from 'vue';
+import { IPostData } from '../interface/post.interface';
+import { addPost } from '../service/post.service';
+import { usePostStore } from '../store/post.store';
+import { useUserStore } from '../store/user.store';
+
+const userStore = useUserStore();
+const postStore = usePostStore();
+const { userData } = storeToRefs(userStore);
+const { postArr } = storeToRefs(postStore);
 
 const state = reactive({
   title: '',
@@ -7,8 +17,22 @@ const state = reactive({
 });
 const { title, body } = toRefs(state);
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   console.log('SUBMIT');
+  const postData: IPostData = {
+    userId: userData.value.id,
+    body: body.value,
+    title: title.value,
+  };
+
+  console.log('postData', postData);
+  const newPost = await addPost(postData);
+  console.log('newPost', newPost);
+  //   let newPostArr = postArr.value;
+  //   newPostArr = newPostArr.push(newPost);
+  //   postStore.$patch({
+  //     postArr: postArr.value.push(newPost),
+  //   });
 };
 </script>
 <template>
