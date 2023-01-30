@@ -3,11 +3,13 @@ import { storeToRefs } from 'pinia';
 import { reactive, toRefs } from 'vue';
 import { IPostData } from '../interface/post.interface';
 import { addPost } from '../service/post.service';
+import { useDisplayStore } from '../store/display.store';
 import { usePostStore } from '../store/post.store';
 import { useUserStore } from '../store/user.store';
 
 const userStore = useUserStore();
 const postStore = usePostStore();
+const displayStore = useDisplayStore();
 const { userData } = storeToRefs(userStore);
 const { postArr } = storeToRefs(postStore);
 
@@ -32,12 +34,11 @@ const handleSubmit = async () => {
   postStore.$patch((state) => {
     state.postArr.push(newPost);
   });
-  console.log('postArr', postArr.value);
-  //   let newPostArr = postArr.value;
-  //   newPostArr = newPostArr.push(newPost);
-  //   postStore.$patch({
-  //     postArr: postArr.value.push(newPost),
-  //   });
+  hidePopup();
+};
+
+const hidePopup = () => {
+  displayStore.$reset();
 };
 </script>
 <template>
