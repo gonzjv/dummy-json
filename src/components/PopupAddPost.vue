@@ -28,6 +28,11 @@ const handleSubmit = async () => {
   console.log('postData', postData);
   const newPost = await addPost(postData);
   console.log('newPost', newPost);
+
+  postStore.$patch((state) => {
+    state.postArr.push(newPost);
+  });
+  console.log('postArr', postArr.value);
   //   let newPostArr = postArr.value;
   //   newPostArr = newPostArr.push(newPost);
   //   postStore.$patch({
