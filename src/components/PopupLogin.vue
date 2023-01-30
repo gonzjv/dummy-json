@@ -3,11 +3,14 @@ import { storeToRefs } from 'pinia';
 import { reactive, toRefs, inject } from 'vue';
 import { VueCookies } from 'vue-cookies';
 import { loginUser } from '../service/user.service';
+import { useDisplayStore } from '../store/display.store';
 import { useUserStore } from '../store/user.store';
 
 const $cookies = inject<VueCookies>('$cookies');
 
 const userStore = useUserStore();
+const displayStore = useDisplayStore();
+const { userData } = storeToRefs(userStore);
 
 const state = reactive({
   username: '',
@@ -24,11 +27,23 @@ const handleSubmit = async () => {
   const user = await loginUser(userData);
   console.log('user', user);
 
-  userStore.$patch({
-    userData: user,
-  });
+  if (user.id) {
+    userStore.$patch({
+      userData: user,
+    });
 
-  $cookies!.set('userData', user);
+    $cookies!.set('userData', user);
+    displayStore.$patch({
+      popup: { display: false, name: '' },
+    });
+  }
+};
+
+const handleLogoutClick = () => {
+  $cookies!.remove('userData');
+  userStore.$patch({
+    userData: {},
+  });
 };
 </script>
 <template>
@@ -57,4 +72,10 @@ const handleSubmit = async () => {
       Log In
     </button>
   </form>
+  <button
+    v-if="userData.id"
+    @click="handleLogoutClick"
+  >
+    Log Out
+  </button>
 </template>
