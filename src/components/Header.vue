@@ -1,10 +1,5 @@
 <script setup lang="ts">
-// import {
-//   computed,
-//   reactive,
-//   toRefs,
-//   ref,
-// } from 'vue';
+import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDisplayStore } from '../store/display.store';
 import {
@@ -18,11 +13,11 @@ const userStore = useUserStore();
 const { popup } = storeToRefs(displayStore);
 const { userData } = storeToRefs(userStore);
 
-// const loginBtnText = computed(() =>
-//   userData.value.firstName
-//     ? userData.value.firstName
-//     : 'Log In'
-// );
+const loginBtnText = computed(() =>
+  userData.value.firstName
+    ? userData.value.firstName
+    : 'Log In'
+);
 
 const openPopup = (popupName: string) => {
   displayStore.$patch({
@@ -59,12 +54,7 @@ const openPopup = (popupName: string) => {
       >
         <UserCircleIcon class="h-7" />
         <p class="min-w-fit pt-2">
-          <!-- {{ loginBtnText }} -->
-          {{
-            userData.firstName
-              ? userData.firstName
-              : 'Log In'
-          }}
+          {{ loginBtnText }}
         </p>
       </button>
     </nav>
