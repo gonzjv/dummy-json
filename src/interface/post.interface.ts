@@ -12,3 +12,7 @@ export interface IPostData {
   title: string;
   body: string;
 }
+
+export interface IPostSearch {
+  posts: IPost[];
+}

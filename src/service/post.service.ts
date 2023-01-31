@@ -1,6 +1,7 @@
 import {
   IPost,
   IPostData,
+  IPostSearch,
 } from '../interface/post.interface';
 
 export interface IPostArr {
@@ -51,4 +52,18 @@ const addPost = async (
   //   }
 };
 
-export { getPostArr, addPost };
+const searchPost = async (
+  searchString: string
+): Promise<IPostSearch> => {
+  const url = `${API_URL}posts/search?q=${searchString}`;
+
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+  //   try {
+  //   } catch (error) {
+  //     console.log('Erorr:', error);
+  //   }
+};
+
+export { getPostArr, addPost, searchPost };

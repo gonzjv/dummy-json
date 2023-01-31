@@ -16,11 +16,6 @@ onBeforeMount(async () => {
 </script>
 <template>
   <main class="flex flex-col gap-10">
-    <!-- <h1
-      class="font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-sky-200 to-indigo-400"
-    >
-      post list
-    </h1> -->
     <ul class="flex flex-col gap-16">
       <li v-for="post in postArr" :key="post.id">
         <Post :post-data="post" />

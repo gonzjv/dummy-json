@@ -54,7 +54,10 @@ onBeforeMount(async () => {
       v-if="isCommentsDisplay"
       class="w-full flex flex-col gap-3 justify-start items-start bg-gray-700 p-5 rounded-lg border border-slate-600"
     >
-      <li v-for="comment in comments">
+      <li
+        v-for="comment in comments"
+        :key="comment.id"
+      >
         <Comment :comment="comment" />
       </li>
     </ul>
