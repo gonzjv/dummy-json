@@ -2,10 +2,13 @@
 import { storeToRefs } from 'pinia';
 import { reactive, toRefs, inject } from 'vue';
 import { VueCookies } from 'vue-cookies';
+import { useRouter } from 'vue-router';
 import { loginUser } from '../service/user.service';
 import { useUserStore } from '../store/user.store';
 
 const $cookies = inject<VueCookies>('$cookies');
+
+const router = useRouter();
 
 const userStore = useUserStore();
 const { userData } = storeToRefs(userStore);
@@ -32,6 +35,8 @@ const handleSubmit = async () => {
 
     $cookies!.set('userData', user);
   }
+
+  router.push({ path: '/' });
 };
 
 const handleLogoutClick = () => {
@@ -40,10 +45,13 @@ const handleLogoutClick = () => {
 };
 </script>
 <template>
-  <main class="flex justify-center">
+  <main
+    class="justify-center bg-gray-700 rounded-lg border border-slate-600 w-fit p-10 flex flex-col gap-7 items-center"
+  >
     <form
+      v-if="!userData.id"
       @submit.prevent="handleSubmit"
-      class="bg-gray-700 rounded-lg border border-slate-600 w-fit p-10 flex flex-col gap-7 items-center"
+      class="flex flex-col gap-7 items-center"
     >
       <input
         required

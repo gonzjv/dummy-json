@@ -13,8 +13,11 @@ const { userData } = storeToRefs(userStore);
 const state = reactive({
   title: '',
   body: '',
+  newPost: {},
+  isPostAdded: false,
 });
-const { title, body } = toRefs(state);
+const { title, body, newPost, isPostAdded } =
+  toRefs(state);
 
 const handleSubmit = async () => {
   console.log('SUBMIT');
@@ -25,16 +28,19 @@ const handleSubmit = async () => {
   };
 
   console.log('postData', postData);
-  const newPost = await addPost(postData);
+  newPost.value = await addPost(postData);
   console.log('newPost', newPost);
 
-  postStore.$patch((state) => {
-    state.postArr.push(newPost);
-  });
+  isPostAdded.value = true;
+  // postStore.$patch((state) => {
+  //   state.postArr.push(newPost);
+  // });
 };
 </script>
 <template>
-  <main class="flex justify-center">
+  <main
+    class="gap-20 flex justify-center flex-col"
+  >
     <form
       @submit.prevent="handleSubmit"
       class="bg-gray-700 rounded-lg border border-slate-600 w-fit p-10 flex flex-col gap-7 items-center"
@@ -60,5 +66,12 @@ const handleSubmit = async () => {
         ДОБАВИТЬ
       </button>
     </form>
+    <aside
+      class="bg-gray-700 p-10 w-64 rounded-lg"
+      v-if="isPostAdded"
+    >
+      <h2 class="text-sky-200">Added post:</h2>
+      {{ newPost }}
+    </aside>
   </main>
 </template>
