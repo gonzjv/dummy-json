@@ -17,5 +17,6 @@ const router = createRouter({
 const app = createApp(App);
 
 app.use(VueCookies, { expires: '1h' });
+app.use(router);
 app.use(createPinia());
 app.mount('#app');

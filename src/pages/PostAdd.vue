@@ -3,15 +3,12 @@ import { storeToRefs } from 'pinia';
 import { reactive, toRefs } from 'vue';
 import { IPostData } from '../interface/post.interface';
 import { addPost } from '../service/post.service';
-import { useDisplayStore } from '../store/display.store';
 import { usePostStore } from '../store/post.store';
 import { useUserStore } from '../store/user.store';
 
 const userStore = useUserStore();
 const postStore = usePostStore();
-const displayStore = useDisplayStore();
 const { userData } = storeToRefs(userStore);
-const { postArr } = storeToRefs(postStore);
 
 const state = reactive({
   title: '',
@@ -34,37 +31,34 @@ const handleSubmit = async () => {
   postStore.$patch((state) => {
     state.postArr.push(newPost);
   });
-  hidePopup();
-};
-
-const hidePopup = () => {
-  displayStore.$reset();
 };
 </script>
 <template>
-  <form
-    @submit.prevent="handleSubmit"
-    class="w-full p-10 flex flex-col gap-7 items-center"
-  >
-    <input
-      required
-      v-model="title"
-      class="w-full bg-transparent border border-sky-200 rounded-md h-10 p-2"
-      type="text"
-      placeholder="Заголовок"
-    />
-    <input
-      required
-      v-model="body"
-      class="w-full bg-transparent border border-sky-200 rounded-md h-10 p-2"
-      type="text"
-      placeholder="Текст"
-    />
-    <button
-      type="submit"
-      class="max-w-max px-3 text-center relative transition-colors duration-500 border-b border-sky-200 hover:text-sky-200 h-10 text-slate-200 font-bold"
+  <main class="flex justify-center">
+    <form
+      @submit.prevent="handleSubmit"
+      class="bg-gray-700 rounded-lg border border-slate-600 w-fit p-10 flex flex-col gap-7 items-center"
     >
-      ДОБАВИТЬ
-    </button>
-  </form>
+      <input
+        required
+        v-model="title"
+        class="w-full bg-transparent border border-sky-200 rounded-md h-10 p-2"
+        type="text"
+        placeholder="Заголовок"
+      />
+      <input
+        required
+        v-model="body"
+        class="w-full bg-transparent border border-sky-200 rounded-md h-10 p-2"
+        type="text"
+        placeholder="Текст"
+      />
+      <button
+        type="submit"
+        class="max-w-max px-3 text-center relative transition-colors duration-500 border-b border-sky-200 hover:text-sky-200 h-10 text-slate-200 font-bold"
+      >
+        ДОБАВИТЬ
+      </button>
+    </form>
+  </main>
 </template>

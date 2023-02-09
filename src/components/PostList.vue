@@ -15,7 +15,9 @@ onBeforeMount(async () => {
 });
 </script>
 <template>
-  <main class="flex flex-col gap-10">
+  <main
+    class="flex flex-col gap-10 w-full items-center"
+  >
     <ul class="flex flex-col gap-16">
       <li v-for="post in postArr" :key="post.id">
         <Post :post-data="post" />
